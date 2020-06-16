@@ -1,5 +1,20 @@
 <project name="MMClearVolume" basedir="." default="jar">
 	<import file="../javapluginbuild.xml"/>
+   
+   <condition property="isUnixButNotMacOsX">
+      <and>
+         <os family="unix"/>
+         <not>
+            <os family="mac"/>
+         </not>
+     </and>
+   </condition>
+
+   <target name="linux" if="isUnixButNotMacOsX">
+      <path id="plugin.classpath">
+         <pathelement location="/usr/share/java/jogl2.jar"/>
+      </path>
+   </target>
 
    <!-- lots of hoopla to install the native jogamp/gluegen libraries
          Please replace with something simplere and more elegant if 
